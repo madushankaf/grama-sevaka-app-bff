@@ -14,30 +14,26 @@ citizen_api:Client citizen_apiEp = check new (config = {
 type CertificateRequest record {
     string id;
     string address;
-    boolean requestCreated;
+    RequestStatus requestStatus;
 };
 
-type IdCheckResponse record {
-    boolean isAvailable;
-};
+enum RequestStatus {
+    NEW,
+    PENDING,
+    COMPLETED,
+    FAILED
+}
 
 service /gramaSevakaAPI on new http:Listener(9091) {
     resource function post certificateRequest(@http:Payload CertificateRequest certificateRequest) returns CertificateRequest|error {
-        json|error result = check citizen_apiEp->getNicNic(certificateRequest.id);
-        if result is error {
-            return error("internal error occured - citizen API not working");
-        }
-        IdCheckResponse|error idCheckResult = result.ensureType(IdCheckResponse);
-        if idCheckResult is error {
-            return error("internal error occured");
-        }
-        boolean isAvalable = idCheckResult.isAvailable;
+        json result = check citizen_apiEp->getNicNic(certificateRequest.id);
+        boolean isAvalable = check result.isAvalable;
+        
         if !isAvalable {
-            return error("ID is not available");
+            certificateRequest.requestStatus = FAILED;
         }
 
-        certificateRequest.requestCreated = true;
-
+        certificateRequest.requestStatus = PENDING;
         return certificateRequest;
     }
 }
