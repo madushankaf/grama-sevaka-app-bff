@@ -29,7 +29,7 @@ service /gramaSevakaAPI on new http:Listener(9091) {
     resource function post certificateRequest(@http:Payload CertificateRequest certificateRequest) returns CertificateRequest|error {
         json result = check citizen_apiEp->getNicNic(certificateRequest.id);
         log:printInfo(result.toString());
-        boolean isAvalable = check result.message.isAvalable;
+        boolean isAvalable = check result.isAvalable;
 
         if !isAvalable {
             certificateRequest.requestStatus = FAILED;
