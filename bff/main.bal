@@ -25,7 +25,7 @@ service /gramaSevakaAPI on new http:Listener(9091) {
     resource function post certificateRequest(@http:Payload CertificateRequest certificateRequest) returns CertificateRequest|error {
         json|error result = check citizen_apiEp->getNicNic(certificateRequest.id);
         if result is error {
-            return error("internal error occured");
+            return error("internal error occured - citizen API not working");
         }
         IdCheckResponse|error idCheckResult = result.ensureType(IdCheckResponse);
         if idCheckResult is error {
