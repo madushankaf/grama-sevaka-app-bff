@@ -1,8 +1,8 @@
 import ballerina/http;
 import madushankaorg/citizen_api;
 
-configurable string citizenAPIClientSecret = "wJkVAL6Mf_al6X6i2dCjuisk3cwa";
-configurable string citizenAPIClientId = "5mRyGz2B5qUv9cpGeXqNvI0zufUa";
+configurable string citizenAPIClientSecret = "XikBPFD_gf5JiWC5KebGqXixM3sa";
+configurable string citizenAPIClientId = "p2apR7ikIqT8elLivV6yeGOzWjQa";
 
 citizen_api:Client citizen_apiEp = check new (config = {
     auth: {
