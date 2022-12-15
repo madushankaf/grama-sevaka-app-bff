@@ -1,6 +1,27 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "properties": {},
+  "properties": {
+    "madushanka": {
+      "type": "object",
+      "properties": {
+        "bff": {
+          "type": "object",
+          "properties": {
+            "citizenAPIClientSecret": {
+              "type": "string",
+              "description": ""
+            },
+            "citizenAPIClientId": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
   "additionalProperties": false
 }
