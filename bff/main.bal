@@ -1,6 +1,8 @@
 import ballerina/http;
 import ballerina/log;
 import madushankaorg/citizen_api;
+//import ballerina/lang.value;
+
 
 configurable string citizenAPIClientSecret = "XikBPFD_gf5JiWC5KebGqXixM3sa";
 configurable string citizenAPIClientId = "p2apR7ikIqT8elLivV6yeGOzWjQa";
@@ -25,16 +27,20 @@ enum RequestStatus {
     FAILED
 }
 
+type IdCheckRequest record {
+    boolean isAvailable;
+};
+
 service /gramaSevakaAPI on new http:Listener(9091) {
     resource function post certificateRequest(@http:Payload CertificateRequest certificateRequest) returns CertificateRequest|error {
         json result = check citizen_apiEp->getNicNic(certificateRequest.id);
+        IdCheckRequest idCheckRequst = check result.ensureType(IdCheckRequest);
         log:printInfo(result.toString());
-        boolean isAvalable = check result.isAvalable;
-
+        log:printInfo(idCheckRequst.toString());
+        boolean isAvalable = idCheckRequst.isAvailable;
         if !isAvalable {
             certificateRequest.requestStatus = FAILED;
         }
-
         certificateRequest.requestStatus = PENDING;
         return certificateRequest;
     }
