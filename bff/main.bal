@@ -39,7 +39,9 @@ service /gramaSevakaAPI on new http:Listener(9091) {
         if !isAvalable {
             certificateRequest.requestStatus = FAILED;
         }
-        certificateRequest.requestStatus = PENDING;
+        else {
+            certificateRequest.requestStatus = PENDING;
+        }
         return certificateRequest;
     }
 }

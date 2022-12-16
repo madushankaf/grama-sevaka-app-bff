@@ -295,5 +295,16 @@ modules = [
 	{org = "madushanka", packageName = "bff", moduleName = "bff"}
 ]
 
+[[package]]
+org = "madushankaorg"
+name = "citizen_api"
+version = "1.0.0"
+dependencies = [
+	{org = "ballerina", name = "http"},
+	{org = "ballerina", name = "url"}
+]
+modules = [
+	{org = "madushankaorg", packageName = "citizen_api", moduleName = "citizen_api"}
+]
 
 
