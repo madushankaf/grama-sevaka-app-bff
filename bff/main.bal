@@ -33,11 +33,9 @@ citizen_api:Client citizen_apiEp = check new (config = {
 
 service /gramaSevakaAPI on new http:Listener(9091) {
     resource function post certificateRequest(@http:Payload CertificateRequest certificateRequest) returns CertificateRequest|error {
-        json result = check citizen_apiEp->getNicNic(certificateRequest.id);
-        IdCheckRequest idCheckRequst = check result.ensureType(IdCheckRequest);
+        IdCheckRequest result = check citizen_apiEp->getNicNic(certificateRequest.id);
         log:printInfo(result.toString());
-        log:printInfo(idCheckRequst.toString());
-        boolean isAvalable = idCheckRequst.isAvailable;
+        boolean isAvalable = result.isAvailable;
         if !isAvalable {
             certificateRequest.requestStatus = FAILED;
         }
