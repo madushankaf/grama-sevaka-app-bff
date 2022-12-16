@@ -181,9 +181,6 @@ version = "0.0.0"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"}
 ]
-modules = [
-	{org = "ballerina", packageName = "lang.value", moduleName = "lang.value"}
-]
 
 [[package]]
 org = "ballerina"
@@ -290,7 +287,6 @@ name = "bff"
 version = "0.1.0"
 dependencies = [
 	{org = "ballerina", name = "http"},
-	{org = "ballerina", name = "lang.value"},
 	{org = "ballerina", name = "log"},
 	{org = "ballerinai", name = "observe"},
 	{org = "madushankaorg", name = "citizen_api"}
@@ -299,16 +295,5 @@ modules = [
 	{org = "madushanka", packageName = "bff", moduleName = "bff"}
 ]
 
-[[package]]
-org = "madushankaorg"
-name = "citizen_api"
-version = "1.0.0"
-dependencies = [
-	{org = "ballerina", name = "http"},
-	{org = "ballerina", name = "url"}
-]
-modules = [
-	{org = "madushankaorg", packageName = "citizen_api", moduleName = "citizen_api"}
-]
 
 
