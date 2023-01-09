@@ -56,7 +56,7 @@ service /gramaSevakaAPI on new http:Listener(9091) {
         }
         else {
             json policeResult = check police_verification_apiEp->getPoliceverificationNic(certificateRequest.id);
-            boolean areCriminalRecordsAvailable = check policeResult.policeRecordStatus;
+            boolean areCriminalRecordsAvailable = check policeResult.policeRecotdStatus;
             if areCriminalRecordsAvailable
             {
                 certificateRequest.requestStatus = FAILED;
