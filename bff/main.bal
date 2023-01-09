@@ -39,7 +39,7 @@ service /gramaSevakaAPI on new http:Listener(9091) {
         boolean isAvalable = result.isAvailable;
         if !isAvalable {
             certificateRequest.requestStatus = FAILED;
-            certificateRequest.message =" ID is not available, please verify."
+            certificateRequest.message =" NIC is not available, please verify.";
         }
         else {
             certificateRequest.requestStatus = PENDING;
