@@ -289,7 +289,8 @@ dependencies = [
 	{org = "ballerina", name = "http"},
 	{org = "ballerina", name = "log"},
 	{org = "ballerinai", name = "observe"},
-	{org = "madushankaorg", name = "citizen_api"}
+	{org = "madushankaorg", name = "citizen_api"},
+	{org = "madushankaorg", name = "police_verification_api"}
 ]
 modules = [
 	{org = "madushanka", packageName = "bff", moduleName = "bff"}
@@ -305,6 +306,18 @@ dependencies = [
 ]
 modules = [
 	{org = "madushankaorg", packageName = "citizen_api", moduleName = "citizen_api"}
+]
+
+[[package]]
+org = "madushankaorg"
+name = "police_verification_api"
+version = "1.0.0"
+dependencies = [
+	{org = "ballerina", name = "http"},
+	{org = "ballerina", name = "url"}
+]
+modules = [
+	{org = "madushankaorg", packageName = "police_verification_api", moduleName = "police_verification_api"}
 ]
 
 
