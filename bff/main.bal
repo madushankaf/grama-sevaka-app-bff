@@ -1,3 +1,4 @@
+import madushankaorg/police_verification_api;
 import madushankaorg/citizen_api;
 import ballerina/http;
 import ballerina/log;
@@ -25,7 +26,18 @@ type IdCheckRequest record {
     boolean isAvailable;
 };
 
+type PoliceRecordStatus record {
+    boolean policeRecotdStatus;
+};
+
 citizen_api:Client citizen_apiEp = check new (config = {
+    auth: {
+        clientId: citizenAPIClientId,
+        clientSecret: citizenAPIClientSecret
+    }
+});
+
+police_verification_api:Client police_verification_apiEp = check new (config = {
     auth: {
         clientId: citizenAPIClientId,
         clientSecret: citizenAPIClientSecret
@@ -39,9 +51,19 @@ service /gramaSevakaAPI on new http:Listener(9091) {
         boolean isAvalable = result.isAvailable;
         if !isAvalable {
             certificateRequest.requestStatus = FAILED;
-            certificateRequest.message =" NIC is not available, please verify.";
+            certificateRequest.message = " NIC is not available, please verify.";
+            return certificateRequest;
         }
         else {
+            json policeResult = check police_verification_apiEp->getPoliceverificationNic(certificateRequest.id);
+            boolean areCriminalRecordsAvailable = check policeResult.policeRecordStatus;
+            if areCriminalRecordsAvailable
+            {
+                certificateRequest.requestStatus = FAILED;
+                certificateRequest.message = " Police verification failed, please contact the nearesrt police station";
+                return certificateRequest;
+            }
+
             certificateRequest.requestStatus = PENDING;
         }
         return certificateRequest;
