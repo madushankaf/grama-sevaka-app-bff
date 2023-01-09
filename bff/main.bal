@@ -11,6 +11,7 @@ type CertificateRequest record {
     string id;
     string address;
     RequestStatus requestStatus;
+    string message;
 };
 
 enum RequestStatus {
@@ -38,6 +39,7 @@ service /gramaSevakaAPI on new http:Listener(9091) {
         boolean isAvalable = result.isAvailable;
         if !isAvalable {
             certificateRequest.requestStatus = FAILED;
+            certificateRequest.message =" ID is not available, please verify."
         }
         else {
             certificateRequest.requestStatus = PENDING;
