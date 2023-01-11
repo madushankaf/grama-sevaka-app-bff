@@ -44,6 +44,13 @@ police_verification_api:Client police_verification_apiEp = check new (config = {
     }
 });
 
+address_api:Client address_apiEp = check new (config = {
+    auth: {
+        clientId: citizenAPIClientId,
+        clientSecret: citizenAPIClientSecret
+    }
+});
+
 service /gramaSevakaAPI on new http:Listener(9091) {
     resource function post certificateRequest(@http:Payload CertificateRequest certificateRequest) returns CertificateRequest|error {
         IdCheckRequest result = check citizen_apiEp->getNicNic(certificateRequest.id);
