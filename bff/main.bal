@@ -6,8 +6,8 @@ import ballerina/log;
 
 //import ballerina/lang.value;
 
-configurable string citizenAPIClientSecret = "XikBPFD_gf5JiWC5KebGqXixM3sa";
-configurable string citizenAPIClientId = "p2apR7ikIqT8elLivV6yeGOzWjQa";
+configurable string citizenAPIClientSecret = "";
+configurable string citizenAPIClientId = "";
 
 type CertificateRequest record {
     string id;
